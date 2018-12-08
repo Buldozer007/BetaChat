@@ -8,7 +8,7 @@ app.use(express.static("."));
 app.get('/', function (req, res) {
    res.redirect('index.html');
 });
-server.listen(betachat.herokuapp.com);
+server.listen(3000);
 
 io.on('connection', function (socket) {
    for(var i in messages) {
@@ -17,16 +17,6 @@ io.on('connection', function (socket) {
    socket.on("send message", function (data) {
        messages.push(data);
        io.sockets.emit("display message", data);
-   })
+   });
+   
 });
-
-/*io.on('connection', function (socket) {
-  for(var i in messages) {
-    io.sockets.emit("delete message", messages[i]);
-  }
-  socket.on("find message", function (data) {
-      messages.splice(0,1);
-      io.sockets.emit("delete message", data);
-  })
-});*/
-
