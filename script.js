@@ -11,7 +11,7 @@ function main() {
            socket.emit("send message", val);
        }
    }
-   button.onclick = handleSubmit;
+   button.onclick  = handleSubmit;
 
 function handleMessage(msg) {
       var p = document.createElement('p');
@@ -22,11 +22,21 @@ function handleMessage(msg) {
 
 socket.on('display message', handleMessage);
 
+
+function deleteFromDom(){
+  var p = document.getElementsByTagName('p');
+      for(var i in p){
+        if (p.length > 0) {
+          chatDiv.removeChild(p[0])
+        }
+        
+    }
+}
+
+socket.on('delete accepted' , deleteFromDom);
+
 function handleDelete(evt){
-      var p = document.getElementsByTagName('p');
-      var text = p.innerText;
-      chatDiv.removeChild(p);
-      socket.emit("delete message" , text );
+      socket.emit("delete message");
    }
 
 delButton.onclick = handleDelete;

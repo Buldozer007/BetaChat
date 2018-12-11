@@ -18,9 +18,10 @@ io.on('connection', function (socket) {
        messages.push(data);
        io.sockets.emit("display message", data);
    });
-   socket.on("delete message" , function(data){
+   socket.on("delete message" , function(){
    		for(var i in messages){
    			messages.splice(i);
    		}
+      io.sockets.emit('delete accepted')
    });
 });
